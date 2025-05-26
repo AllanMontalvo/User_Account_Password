@@ -1,5 +1,5 @@
 # User_Account_Password
-Procedure on how to setup password attempt threshold and unlock account when threshold is met in Active Directory on Azure.
+Procedure on how to setup password attempt threshold, reset password, and unlock account when threshold is met in Active Directory on Azure.
 
 
 <h2>Environments and Technologies Used</h2>
@@ -21,6 +21,7 @@ Procedure on how to setup password attempt threshold and unlock account when thr
 - Go to "Forest:domanin name (mydomain.net)" > "Domains" > "Domain name (mydomain.net)" > right click "Default Domain Policy" > "Edit...".
 - Go to "Computer Configuration" > "Policies" > Windows Settings" > "Security Settings" > "Account Policies" > "Account Lockout Policy".
 - Select "Account Lockout Threshold", set for 5 attempts, and click "Apply".
+
 ![Account Lockout Threshold](https://github.com/user-attachments/assets/8e9e0df1-5f3f-441c-8b83-8b9a8bbb0021)
 
 **Step 2: Update Group Policy**
@@ -35,13 +36,17 @@ Procedure on how to setup password attempt threshold and unlock account when thr
 **Step 3: Attempt Login**
 - Select a domain user and mistype the password 5 times.
 - On the sixth try you will get a prompt of account is lock after multiple attempts.
+
 ![Account Lockout message](https://github.com/user-attachments/assets/cc62c2d6-c589-4b52-b7a2-91a5374d2868)
 
 **Step 4: Unlock Account**
 - Go back to DC-1
 - Open "Server Manger" > "Tools" on top left > "Active Directory Users and Computers".
 - Right-click your domain name (mydomain.net) and select "Find"
-- Type user name you are looking for.
-- Select "Unlock Account" and click "Apply"
-![Unlock Account](https://github.com/user-attachments/assets/6f98a38e-95cb-4749-9ac1-a4b070665712)
-- Login to Client-1 with correct password and should login to client-1.
+- Type the user's name you are looking for.
+- Right-click the user's name and select "Reset Password..."
+- Type new password (Password2), check "Unlock the user's account" box and click "OK".
+
+![Reset Password](https://github.com/user-attachments/assets/f27b8b7b-5ab5-421f-8b89-e7bbb843baf3)
+
+- Login to Client-1 with new password.
